@@ -16,13 +16,13 @@ const UserForm = ({ values, errors, touched, status }) => {
     <div>
       <div className="user-form">
         <Form>
-          <Field type="text" name="name" />
+          <Field type="text" name="name" placeholder="Name" />
           {touched.name && errors.name && <p className="error">{errors.name}</p>}
-          <Field type="text" name="email" />
+          <Field type="text" name="email" placeholder="Email" />
           {touched.email && errors.email && (
             <p className="error">{errors.email}</p>
           )}
-          <Field type="text" name="password" />
+          <Field type="text" name="password" placeholder="Password" />
           {touched.password && errors.password && (
             <p className="error">{errors.password}</p>
           )}
@@ -66,7 +66,7 @@ const FormikUserForm = withFormik({
       .oneOf([true], "Must agree to Terms of Service")
       .required()
   }),
-  handleSubmit(values, { setStatus }) {
+  handleSubmit(values, { setStatus, resetForm }) {
     axios
       .post("https://reqres.in/api/users", values)
       .then(res => {
@@ -74,6 +74,7 @@ const FormikUserForm = withFormik({
         setStatus(res.data);
       })
       .catch(err => console.log(err));
+    resetForm({ name: "", email: "", password: "", tos: false });
   }
 })(UserForm);
 
