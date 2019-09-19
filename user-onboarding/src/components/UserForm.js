@@ -22,7 +22,7 @@ const UserForm = ({ values, errors, touched, status }) => {
           {touched.email && errors.email && (
             <p className="error">{errors.email}</p>
           )}
-          <Field type="text" name="password" placeholder="Password" />
+          <Field type="password" name="password" placeholder="Password" />
           {touched.password && errors.password && (
             <p className="error">{errors.password}</p>
           )}

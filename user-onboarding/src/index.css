@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -14,23 +18,37 @@ h1 {
 
 .user-form {
   margin: 10%;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
 }
-
+form {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+form p{
+  color: red;
+}
 .user-list {
+  width: 70%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: 10%;
+  margin: 5% 10% 10% 10%;
 }
 
 .user {
-  width: 200px;
+  width: 40%;
   height: 150px;
   border: 1px solid black;
   text-align: center;
   vertical-align: middle;
   margin: 5%;
+  border-radius: 10px;
+  box-shadow: 1.5px 2px darkgray;
 }
 .user h3 {
   width: 100%;
@@ -40,4 +58,9 @@ h1 {
   padding: 2.5% 0;
   padding-top: 10%;
   margin: auto;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.user p{
+  padding: 5%;
 }
