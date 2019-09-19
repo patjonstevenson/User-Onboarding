@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import UserList from "./UserList";
 
 const UserForm = ({ values, errors, touched, status }) => {
   const [users, setUsers] = useState([]);
@@ -12,27 +13,35 @@ const UserForm = ({ values, errors, touched, status }) => {
     }
   }, [status]);
   return (
-    <div className="user-form">
-      <Form>
-        <Field type="text" name="name" />
-        {touched.name && errors.name && <p className="error">{errors.name}</p>}
-        <Field type="text" name="email" />
-        {touched.email && errors.email && (
-          <p className="error">{errors.email}</p>
-        )}
-        <Field type="text" name="password" />
-        {touched.password && errors.password && (
-          <p className="error">{errors.password}</p>
-        )}
-        <label>
-          Terms of Service
+    <div>
+      <div className="user-form">
+        <Form>
+          <Field type="text" name="name" />
+          {touched.name && errors.name && <p className="error">{errors.name}</p>}
+          <Field type="text" name="email" />
+          {touched.email && errors.email && (
+            <p className="error">{errors.email}</p>
+          )}
+          <Field type="text" name="password" />
+          {touched.password && errors.password && (
+            <p className="error">{errors.password}</p>
+          )}
+          <label>
+            Terms of Service
           <Field type="checkbox" name="tos" />
-          {touched.tos && errors.tos && <p className="error">{errors.tos}</p>}
-        </label>
-        <button type="submit">Add User</button>
-      </Form>
+            {touched.tos && errors.tos && <p className="error">{errors.tos}</p>}
+          </label>
+          <button type="submit">Add User</button>
+        </Form>
+        {/*users.map(user => <h1>Hello World</h1>)*/}
+        {<UserList users={users} />}
+      </div>
+
+
     </div>
   );
+
+
 };
 
 const FormikUserForm = withFormik({
