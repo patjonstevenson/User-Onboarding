@@ -66,15 +66,19 @@ const FormikUserForm = withFormik({
       .oneOf([true], "Must agree to Terms of Service")
       .required()
   }),
-  handleSubmit(values, { setStatus, resetForm }) {
-    axios
-      .post("https://reqres.in/api/users", values)
-      .then(res => {
-        console.log(res.data);
-        setStatus(res.data);
-      })
-      .catch(err => console.log(err));
-    resetForm({ name: "", email: "", password: "", tos: false });
+  handleSubmit(values, { setStatus, resetForm, setErrors }) {
+    if (values.email === "waffle@syrup.com") {
+      setErrors({ email: "That email is already taken." });
+    } else {
+      axios
+        .post("https://reqres.in/api/users", values)
+        .then(res => {
+          console.log(res.data);
+          setStatus(res.data);
+        })
+        .catch(err => console.log(err));
+      resetForm({ name: "", email: "", password: "", tos: false });
+    }
   }
 })(UserForm);
 
