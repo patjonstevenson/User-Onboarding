@@ -29,11 +29,11 @@ form {
   flex-direction: column;
   justify-content: space-between;
 }
-form p{
+.error {
   color: red;
 }
 .user-list {
-  width: 70%;
+  width: 90%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

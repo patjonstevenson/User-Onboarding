@@ -34,6 +34,9 @@ const UserForm = ({ values, errors, touched, status }) => {
             <option value="Front-End">Front-End</option>
             <option value="UX Design">UX Design</option>
           </Field>
+          {touched.role && errors.role && (
+            <p className="error">{errors.role}</p>
+          )}
           <label>
             Terms of Service
           <Field type="checkbox" name="tos" />
@@ -71,6 +74,7 @@ const FormikUserForm = withFormik({
       .min(8, "Password must be at least 8 characters")
       .max(50, "Password can be no longer than 50 characters")
       .required("Password required"),
+    role: Yup.string().required("Must select a role"),
     tos: Yup.boolean()
       .oneOf([true], "Must agree to Terms of Service")
       .required()
@@ -78,6 +82,11 @@ const FormikUserForm = withFormik({
   handleSubmit(values, { setStatus, resetForm, setErrors }) {
     if (values.email === "waffle@syrup.com") {
       setErrors({ email: "That email is already taken." });
+
+    } else if (!values.tos) {
+      setErrors({ tos: "Must agree to Terms of Service." });
+    } else if (!values.role) {
+      setErrors({ role: "Must select a role." });
     } else {
       axios
         .post("https://reqres.in/api/users", values)
@@ -86,7 +95,8 @@ const FormikUserForm = withFormik({
           setStatus(res.data);
         })
         .catch(err => console.log(err));
-      resetForm({ name: "", email: "", password: "", tos: false });
+      resetForm({ name: "", email: "", password: "", role: "", tos: false });
+
     }
   }
 })(UserForm);
